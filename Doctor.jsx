@@ -69,17 +69,19 @@ function Doctor() {
     setEditId(doc._id);
   };
 
-  const handleDelete = async (id) => {
+ const handleDelete = async (id) => {
     if (!window.confirm("Delete this doctor?")) return;
 
     try {
       await axios.delete(`${API_URL}/doctor/${id}`);
       alert("Deleted successfully");
-      fetchDoctor();
+      await fetchDoctor(); 
     } catch (error) {
       console.error("Error deleting doctor:", error);
+      alert("Failed to delete doctor"); 
     }
   };
+
 
   return (
     <div className="p-6">
