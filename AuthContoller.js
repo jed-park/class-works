@@ -41,15 +41,18 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const removedoctor = await doctor.findByIdAndRemove(req.params.id)
+        const removedoctor = await doctor.findByIdAndDelete(req.params.id);
 
-        if (!removedoctor) { return res.status(404).json({ msg: "doctor not found" }) }
+        if (!removedoctor) { 
+            return res.status(404).json({ msg: "doctor not found" }) 
+        }
         res.status(200).json({ msg: "doctor removed" })
 
     } catch (error) {
-        res.status(500).json({ msg: "error removing" })
+        res.status(500).json({ msg: "error removing", error: error.message })
     }
 };
+
 
 
 
